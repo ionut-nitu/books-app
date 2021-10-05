@@ -1,7 +1,5 @@
 # BooksApp
 
-## Development server
-
 Run `npm start` for a dev server that will start angular and create a json-server. 
 
 Navigate to:
