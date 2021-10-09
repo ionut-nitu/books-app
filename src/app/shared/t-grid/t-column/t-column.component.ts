@@ -1,5 +1,5 @@
 import {  Component, Input,OnInit } from '@angular/core';
-import { FilterTypes, SortType } from '../../services/filter-service/filter';
+import { FilterTypes, SortType } from '../../interfaces/filter';
 import { FilterService } from '../../services/filter-service/filter.service';
 
 @Component({
@@ -7,11 +7,10 @@ import { FilterService } from '../../services/filter-service/filter.service';
   templateUrl: './t-column.component.html',
   styleUrls: ['./t-column.component.scss']
 })
-export class TColumnComponent implements OnInit {
-  @Input() name: string = '';
-  @Input() property: string = '';
-  @Input() sortable: boolean = false;
-  sortType = null;
+export class TColumnComponent<T> implements OnInit {
+  @Input() name: string;
+  @Input() property: keyof T;
+  @Input() sortable: boolean;
   currentFilter:FilterService;
   constructor(private filter: FilterService) {
     this.currentFilter = filter

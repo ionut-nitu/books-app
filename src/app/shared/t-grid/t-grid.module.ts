@@ -6,7 +6,7 @@ import { TPaginationComponent } from './t-pagination/t-pagination.component';
 import { TProgressComponent } from './t-progress/t-progress.component';
 import { TRowComponent } from './t-row/t-row.component';
 import { TGridComponent } from './t-grid.component';
-import { FilterService } from '../services/filter-service/filter.service';
+import { TBodyComponent } from './t-body/t-body.component';
 
 @NgModule({
   imports: [
@@ -18,7 +18,8 @@ import { FilterService } from '../services/filter-service/filter.service';
     TProgressComponent,
     TColumnComponent,
     TRowComponent,
-    THeaderComponent
+    THeaderComponent,
+    TBodyComponent
   ],
   declarations: [
     TGridComponent,
@@ -26,7 +27,8 @@ import { FilterService } from '../services/filter-service/filter.service';
     TProgressComponent,
     TColumnComponent,
     TRowComponent,
-    THeaderComponent
+    THeaderComponent,
+    TBodyComponent
   ],
   providers: []
 })

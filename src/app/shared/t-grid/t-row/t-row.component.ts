@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit,EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 't-row',
@@ -6,9 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./t-row.component.scss']
 })
 export class TRowComponent implements OnInit {
+  @Input() columns:string[] = [];
+  @Input() item:any;
+  @Output() itemSelected = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit(): void {
+  }
+  onSelect(item: any) {
+    this.itemSelected.emit(item);
   }
 
 }

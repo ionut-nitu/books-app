@@ -1,2 +1,7 @@
-<p>t-row works!</p>
-<t-column></t-column>
+<div (click)="onSelect(item)">
+    <div *ngFor="let column of columns" >
+        <div>{{column}}</div>
+        <div>{{item[column]}}</div>
+    </div>
+</div>
+

@@ -1,3 +1,8 @@
 <div>
-   <ng-content></ng-content>
+    <t-header>
+        <ng-content></ng-content>
+    </t-header>
+    <t-body>
+        <t-row *ngFor="let item of data | async; index as i" [item]="item" [columns]="columns" (itemSelected)="selectItem($event)"></t-row>
+    </t-body>
 </div>
