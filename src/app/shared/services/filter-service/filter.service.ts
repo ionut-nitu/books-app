@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TGridModule } from '../../t-grid/t-grid.module';
-import { Filter, FilterTypes, GridFilter, SortType } from './filter';
+import { Filter, FilterTypes, GridFilter, SortType } from '../../interfaces/filter';
 
 @Injectable({
   providedIn: TGridModule
