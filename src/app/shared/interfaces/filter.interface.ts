@@ -14,6 +14,7 @@ export interface SearchFilter {
 export interface PaginationFilter {
     page: number;
     pageSize: number;
+    totalPages:number;
 }
 export enum FilterTypes {
     SORT,
@@ -26,3 +27,7 @@ export interface GridFilter {
     [FilterTypes.PAGINATION]: PaginationFilter;
 }
 export type Filter = SortFilter | PaginationFilter | SearchFilter
+export type FilterObserver =  {
+  id: number;
+  notify: () => void;
+}

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterService } from './shared/services/filter-service/filter.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ColumnService } from './shared/services/column-service/column.service';
 
 @NgModule({
   declarations: [
@@ -15,9 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [FilterService],
+  providers: [FilterService, ColumnService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

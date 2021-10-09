@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Book } from 'src/app/shared/interfaces/book.interface';
-import { GridFilter } from 'src/app/shared/interfaces/filter';
+import { GridFilter } from 'src/app/shared/interfaces/filter.interface';
 import { BooksService } from 'src/app/shared/services/books-service/books.service';
 
 
@@ -16,7 +16,7 @@ export class BooksListComponent implements OnInit {
   selectedBook: Book;
   constructor(private booksService: BooksService) { }
   ngOnInit(): void {
-    this.getBooks(null)
+    // this.getBooks(null)
   }
 
   selectBook(book: Book) {

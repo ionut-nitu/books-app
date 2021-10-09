@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Book } from '../../interfaces/book.interface';
-import { FilterTypes, GridFilter, SortType } from '../../interfaces/filter';
+import { FilterTypes, GridFilter, SortType } from '../../interfaces/filter.interface';
 const BASE_URL = 'http://localhost:3000/books'
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class BooksService {
   }
   getBooks(filter:GridFilter) {
     const url = this.convertFilterToUrl(filter)
-    return this.http.get<Book[]>(url);
+    return this.http.get<Book[]>(url)
   }
   createBook(book: Book) {
     return this.http.post<Book>(BASE_URL, book);

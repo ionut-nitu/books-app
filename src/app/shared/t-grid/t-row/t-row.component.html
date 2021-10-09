@@ -1,7 +1,6 @@
-<div (click)="onSelect(item)">
-    <div *ngFor="let column of columns" >
-        <div>{{column}}</div>
-        <div>{{item[column]}}</div>
+<div (click)="onSelect(item)" class="row-container">
+    <div *ngFor="let column of columns"  [style.flex]="column.flex">
+        <div class="row-value" >{{item[column.property]}}</div>
     </div>
 </div>
 

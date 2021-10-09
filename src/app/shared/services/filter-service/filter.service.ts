@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TGridModule } from '../../t-grid/t-grid.module';
-import { Filter, FilterTypes, GridFilter, SortType } from '../../interfaces/filter';
+import { Filter, FilterObserver, FilterTypes, GridFilter, SortType } from '../../interfaces/filter.interface';
 
 @Injectable({
   providedIn: TGridModule
@@ -14,7 +14,8 @@ export class FilterService {
     },
     [FilterTypes.PAGINATION]: {
       page:0,
-      pageSize:10
+      pageSize:10,
+      totalPages: 0
     },
     [FilterTypes.SEARCH]: {
       field:null,
@@ -44,6 +45,48 @@ export class FilterService {
     }
     this.notifyObservers()
   }
+  setTotalPages(totalPages:number) {
+    this.filterState = {
+        ...this.filterState,
+        [FilterTypes.PAGINATION]: {
+          ...this.filterState[FilterTypes.PAGINATION],
+          totalPages
+        }
+    } 
+  }
+  changePage(direction: number) {
+    console.log("change page")
+    const paginationState = this.filterState[FilterTypes.PAGINATION]
+    console.log(paginationState, "test")
+    if(paginationState.page === 0 && direction === -1) {
+      return
+    }
+    // if(paginationState.totalPages === paginationState.page && direction === 1) {
+    //   return
+    // }
+    this.filterState = {
+      ...this.filterState,
+      [FilterTypes.PAGINATION]: {
+        ...paginationState,
+        page: paginationState.page + direction
+      }
+    }
+    console.log(this.filterState, "test")
+  this.notifyObservers()
+}
+  changePageSize(pageSize: number) {
+    this.filterState = {
+      ...this.filterState,
+      [FilterTypes.PAGINATION]: {
+        ...this.filterState[FilterTypes.PAGINATION],
+        pageSize
+      }
+    }
+    this.notifyObservers()
+  }
+  getCurrentPage() {
+    return this.filterState[FilterTypes.PAGINATION].page
+  }
   getSortFilter() {
     return this.filterState[FilterTypes.SORT]
   }
@@ -57,9 +100,5 @@ export class FilterService {
   getAllFilters() {
     return this.filterState
   }
-}
-export type FilterObserver =  {
-  id: number;
-  notify: () => void;
 }
 

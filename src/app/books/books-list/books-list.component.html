@@ -1,5 +1,5 @@
-<p>books-list works!</p>
 <t-grid [data]="books$" (filtersChange)="getBooks($event)" (itemSelected)="selectBook($event)">
-    <t-column name="title" [sortable]="true"></t-column>
-    <t-column name="shortDescription" [sortable]="true"></t-column>
+    <t-column name="Page Count" property="pageCount" [flex]="1" [sortable]="true"></t-column>
+    <t-column name="Title" property="title" [flex]="1" [sortable]="true"></t-column>
+    <t-column name="Description" [flex]="3" property="shortDescription" [sortable]="true"></t-column>
 </t-grid>

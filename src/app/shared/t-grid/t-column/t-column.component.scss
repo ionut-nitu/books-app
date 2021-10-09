@@ -1,0 +1,18 @@
+:host {
+    cursor:pointer;
+    & mat-icon {
+        font-size:12px;
+        height:15px;
+        width:10px;
+        margin-left:8px;
+    }
+}
+.column-name {
+    font-weight: bold;
+
+}
+.header-item {
+    display:flex;
+    align-items: center;
+    height: 56px;
+}

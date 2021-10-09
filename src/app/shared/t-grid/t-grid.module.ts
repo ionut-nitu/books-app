@@ -7,10 +7,12 @@ import { TProgressComponent } from './t-progress/t-progress.component';
 import { TRowComponent } from './t-row/t-row.component';
 import { TGridComponent } from './t-grid.component';
 import { TBodyComponent } from './t-body/t-body.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MatIconModule
   ],
   exports:[
     TGridComponent,
