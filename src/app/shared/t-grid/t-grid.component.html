@@ -1,9 +1,13 @@
 <div class="container">
+    
     <t-header>
         <ng-content></ng-content>
     </t-header>
-    <t-body>
-        <t-row *ngFor="let item of data | async; index as i" [item]="item" [columns]="columns" (itemSelected)="selectItem($event)"></t-row>
+    <t-body *ngIf="(data | async)">
+        <t-row *ngFor="let item of (data | async) ; index as i" [item]="item" [columns]="columns" (itemSelected)="selectItem($event)"></t-row>
+        <div *ngIf="!(data | async)" class="loading-container">
+                <t-progress type="spinner" color="#1976d2" ></t-progress>
+            </div>
     </t-body>
     <t-pagination></t-pagination>
 </div>

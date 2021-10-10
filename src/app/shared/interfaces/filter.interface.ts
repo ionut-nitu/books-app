@@ -14,7 +14,6 @@ export interface SearchFilter {
 export interface PaginationFilter {
     page: number;
     pageSize: number;
-    totalPages:number;
 }
 export enum FilterTypes {
     SORT,

@@ -1,6 +1,8 @@
 <div (click)="onSelect(item)" class="row-container">
-    <div *ngFor="let column of columns"  [style.flex]="column.flex">
-        <div class="row-value" >{{item[column.property]}}</div>
+    <div *ngFor="let column of columns"  [style.flex]="column.flex" class="row-value-container">
+        <div class="row-value" ><span>
+
+       {{item[column.property]}}  </span></div>
     </div>
 </div>
 

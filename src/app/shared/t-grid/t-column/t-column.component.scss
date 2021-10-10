@@ -6,6 +6,7 @@
         width:10px;
         margin-left:8px;
     }
+    border-right:1px solid #f0f0f0;
 }
 .column-name {
     font-weight: bold;
@@ -14,5 +15,6 @@
 .header-item {
     display:flex;
     align-items: center;
+    padding:12px;
     height: 56px;
 }

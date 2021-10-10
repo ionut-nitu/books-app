@@ -2,7 +2,16 @@
     background-color: white;
     border-radius:5px;
     margin:24px;
-    border: 1px solid #e2e2e2;
+    border: 1px solid rgba(0, 0, 0, 0.12);
     position: relative;
     overflow: hidden;
+    padding-bottom:56px;
+    box-sizing: border-box;
+}
+.loading-container {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+    width:100%;
 }

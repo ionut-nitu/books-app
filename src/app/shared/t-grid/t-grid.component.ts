@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Column, ColumnObserver } from '../interfaces/column.interface';
 import {  GridFilter } from '../interfaces/filter.interface';
 import { ColumnService } from '../services/column-service/column.service';
@@ -14,10 +15,12 @@ export class TGridComponent implements OnInit {
   columns:Column[] = [];
   @Output() itemSelected = new EventEmitter<any>();
   @Output() filtersChange = new EventEmitter<GridFilter>();
-  @Input() data: any;
+  @Input() data: Observable<any>;
   filters$;
   columns$;
   columnObserver: ColumnObserver;
+  progress = 1;
+  radius = 25;
   constructor(private filterService: FilterService, private columnService: ColumnService) {
     this.filters$ = filterService.getFilters()
     this.columns$ = this.columnService.getColumns()
@@ -25,6 +28,9 @@ export class TGridComponent implements OnInit {
     this.columns$.subscribe((value) => this.columns = value)
   }
   ngAfterViewInit() {
+  }
+  changeProgress() {
+    this.progress+=1
   }
   getData(value: GridFilter) {
     this.filtersChange.emit(value)

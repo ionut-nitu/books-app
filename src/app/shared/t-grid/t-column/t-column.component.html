@@ -2,7 +2,7 @@
     <div class="column-name">
         {{name}}
     </div>
-    <mat-icon *ngIf="!isArrowUp && getIsSorted()" aria-hidden="false" aria-label="Sort down">south</mat-icon>
-    <mat-icon *ngIf="isArrowUp && getIsSorted()" aria-hidden="false" aria-label="Sort up">north</mat-icon>
+    <mat-icon *ngIf="!isArrowUp && (isSorted | async)" aria-hidden="false" aria-label="Sort down">south</mat-icon>
+    <mat-icon *ngIf="isArrowUp && (isSorted | async)" aria-hidden="false" aria-label="Sort up">north</mat-icon>
     
 </div>

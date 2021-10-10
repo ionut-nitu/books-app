@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FilterTypes } from '../../interfaces/filter.interface';
+import { FilterTypes, GridFilter } from '../../interfaces/filter.interface';
 import { FilterService } from '../../services/filter-service/filter.service';
 
 @Component({
@@ -10,13 +10,21 @@ import { FilterService } from '../../services/filter-service/filter.service';
 })
 export class TPaginationComponent implements OnInit {
   page:number;
+  pageSize:number;
   constructor(private filterService: FilterService) { }
 
   ngOnInit(): void {
-    this.filterService.getFilters().subscribe((filters) => this.page = filters[FilterTypes.PAGINATION].page)
+    this.filterService.getFilters().subscribe((filters:GridFilter) => {
+      const {page, pageSize} = filters[FilterTypes.PAGINATION]
+      this.page = page
+      this.pageSize = pageSize
+    })
   }
   changePage(direction: number) {
      this.filterService.changePage(direction)
+  }
+  onPageSizeChange(e:any) {
+    this.filterService.changePageSize(+e.target.value)
   }
   goToNextPage() {
     this.changePage(1)

@@ -1,5 +1,6 @@
 import {  ChangeDetectionStrategy, Component, HostBinding, Input,OnInit } from '@angular/core';
-import { FilterTypes, SortType } from '../../interfaces/filter.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { FilterTypes, GridFilter, SortType } from '../../interfaces/filter.interface';
 import { ColumnService } from '../../services/column-service/column.service';
 import { FilterService } from '../../services/filter-service/filter.service';
 
@@ -16,7 +17,14 @@ export class TColumnComponent implements OnInit {
   @Input() flex: number = 1;
   @HostBinding('style.flex') flexHost = this.flex;
   isArrowUp = false;
-  constructor(private filterService: FilterService, private columnService:ColumnService) {}
+  isSorted = new BehaviorSubject(false);
+  constructor(private filterService: FilterService, private columnService:ColumnService) {
+    filterService.getFilters().subscribe((filters:GridFilter) => {
+      if(filters) {
+        this.isSorted.next(filters[FilterTypes.SORT].field === this.property)
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.columnService.addColumn({
@@ -27,11 +35,8 @@ export class TColumnComponent implements OnInit {
     })
     this.flexHost = this.flex;
   }
-  getIsSorted() {
-    return this.filterService.getSortFilter().field === this.property
-  }
   getSortValue() {
-    if(this.getIsSorted()) {
+    if(this.isSorted.getValue()) {
       return this.filterService.getSortFilter().type
     }
     return null

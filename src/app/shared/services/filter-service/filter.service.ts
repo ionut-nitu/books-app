@@ -9,8 +9,7 @@ const initialState: GridFilter = {
     },
     [FilterTypes.PAGINATION]: {
       page:0,
-      pageSize:10,
-      totalPages: 0
+      pageSize:0,
     },
     [FilterTypes.SEARCH]: {
       field:null,
@@ -45,24 +44,11 @@ export class FilterService {
       [newFilter.type]: newFilter.value
     })
   }
-  setTotalPages(totalPages:number) {
-    this.filterState$.next({
-        ...this.filterState$.getValue(),
-        [FilterTypes.PAGINATION]: {
-          ...this.filterState$.getValue()[FilterTypes.PAGINATION],
-          totalPages
-        }
-    })
-  }
   changePage(direction: number) {
     const paginationState = this.filterState$.getValue()[FilterTypes.PAGINATION]
-    console.log(paginationState, "test")
     if(paginationState.page === 0 && direction === -1) {
       return
     }
-    // if(paginationState.totalPages === paginationState.page && direction === 1) {
-    //   return
-    // }
     this.filterState$.next({
       ...this.filterState$.getValue(),
       [FilterTypes.PAGINATION]: {
@@ -76,7 +62,8 @@ export class FilterService {
       ...this.filterState$.getValue(),
       [FilterTypes.PAGINATION]: {
         ...this.filterState$.getValue()[FilterTypes.PAGINATION],
-        pageSize
+        pageSize,
+        page:0
       }
     })
   }

@@ -5,8 +5,27 @@
     bottom:0;
     display:flex;
     align-items: center;
+    justify-content: flex-end;
+    padding-right:24px;
+    box-sizing: border-box;
+    position: absolute;
+    bottom:0;
+    border-top: 1px solid #f0f0f0;
 }
 .pagination-icon {
     cursor: pointer;
     height:24px;
+}
+.page-size-container {
+    margin-right:12px;
+    margin-left:12px;
+    display: flex;
+}
+.page-size-select {
+    margin-left:8px;
+}
+.page-info {
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }

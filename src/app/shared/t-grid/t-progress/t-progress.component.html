@@ -1,1 +1,7 @@
-<p>t-progress works!</p>
+<div *ngIf="type === 'spinner'"  class="lds-ring" [style.width.px]="radius + 5" [style.height.px]="radius + 5">
+    <div [style.width.px]="radius" [style.height.px]="radius" [style.border-color]='color + " transparent transparent transparent"'></div>
+    <div [style.width.px]="radius" [style.height.px]="radius" [style.border-color]='color + " transparent transparent transparent"'></div>
+    <div [style.width.px]="radius" [style.height.px]="radius" [style.border-color]='color + " transparent transparent transparent"'></div>
+    <div [style.width.px]="radius" [style.height.px]="radius" [style.border-color]='color + " transparent transparent transparent"'></div>
+</div>
+<canvas *ngIf="type === 'progress'"  id="progress-circle" ></canvas>
