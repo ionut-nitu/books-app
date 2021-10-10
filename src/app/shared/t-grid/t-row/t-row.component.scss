@@ -1,13 +1,18 @@
 .row-container {
     flex:1;
     display:flex;
-    height:56px; 
+    height:48px; 
     overflow: hidden;
-    text-overflow: ellipsis; 
     border-bottom: 1px solid #e2e2e2;
     align-items: center;
     padding:8px;
+        box-sizing: border-box;
 }
 .row-value {
     color: #2A2A2A;
+    height:48px;
+    display: flex;
+    align-items: center;
+    text-overflow: ellipsis;
+
 }

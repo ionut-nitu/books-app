@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 import { TGridModule } from '../../t-grid/t-grid.module';
 import { Filter, FilterObserver, FilterTypes, GridFilter, SortType } from '../../interfaces/filter.interface';
-
-@Injectable({
-  providedIn: TGridModule
-})
-export class FilterService {
-  observers: FilterObserver[] = []
-  filterState: GridFilter = {
+import { BehaviorSubject } from 'rxjs';
+const initialState: GridFilter = {
     [FilterTypes.SORT]: {
       field:null,
       type: SortType.ASC
@@ -21,7 +16,13 @@ export class FilterService {
       field:null,
       value: null
     }
-  }
+}
+@Injectable({
+  providedIn: TGridModule
+})
+export class FilterService {
+  observers: FilterObserver[] = []
+  filterState$ = new BehaviorSubject<GridFilter>(initialState)
   constructor() { }
   getObserversCount () {
     return this.observers.length
@@ -39,24 +40,22 @@ export class FilterService {
     this.observers.forEach(observer => observer.notify())
   }
   changeFilter(newFilter: {type: FilterTypes, value: Filter }) {
-    this.filterState = {
-      ...this.filterState,
+    this.filterState$.next({
+      ...this.filterState$.getValue(),
       [newFilter.type]: newFilter.value
-    }
-    this.notifyObservers()
+    })
   }
   setTotalPages(totalPages:number) {
-    this.filterState = {
-        ...this.filterState,
+    this.filterState$.next({
+        ...this.filterState$.getValue(),
         [FilterTypes.PAGINATION]: {
-          ...this.filterState[FilterTypes.PAGINATION],
+          ...this.filterState$.getValue()[FilterTypes.PAGINATION],
           totalPages
         }
-    } 
+    })
   }
   changePage(direction: number) {
-    console.log("change page")
-    const paginationState = this.filterState[FilterTypes.PAGINATION]
+    const paginationState = this.filterState$.getValue()[FilterTypes.PAGINATION]
     console.log(paginationState, "test")
     if(paginationState.page === 0 && direction === -1) {
       return
@@ -64,41 +63,38 @@ export class FilterService {
     // if(paginationState.totalPages === paginationState.page && direction === 1) {
     //   return
     // }
-    this.filterState = {
-      ...this.filterState,
+    this.filterState$.next({
+      ...this.filterState$.getValue(),
       [FilterTypes.PAGINATION]: {
         ...paginationState,
         page: paginationState.page + direction
       }
-    }
-    console.log(this.filterState, "test")
-  this.notifyObservers()
+    })
 }
   changePageSize(pageSize: number) {
-    this.filterState = {
-      ...this.filterState,
+    this.filterState$.next({
+      ...this.filterState$.getValue(),
       [FilterTypes.PAGINATION]: {
-        ...this.filterState[FilterTypes.PAGINATION],
+        ...this.filterState$.getValue()[FilterTypes.PAGINATION],
         pageSize
       }
-    }
-    this.notifyObservers()
+    })
   }
   getCurrentPage() {
-    return this.filterState[FilterTypes.PAGINATION].page
+    return this.filterState$.getValue()[FilterTypes.PAGINATION].page
   }
   getSortFilter() {
-    return this.filterState[FilterTypes.SORT]
+    return this.filterState$.getValue()[FilterTypes.SORT]
   }
 
   getPaginationFilter() {
-     return this.filterState[FilterTypes.PAGINATION]
+     return this.filterState$.getValue()[FilterTypes.PAGINATION]
   }
   getSearchFilter() {
-    return this.filterState[FilterTypes.SEARCH]
+    return this.filterState$.getValue()[FilterTypes.SEARCH]
   }
-  getAllFilters() {
-    return this.filterState
+  getFilters() {
+    return this.filterState$
   }
 }
 

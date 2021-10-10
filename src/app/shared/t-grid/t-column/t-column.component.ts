@@ -1,4 +1,4 @@
-import {  Component, HostBinding, Input,OnInit } from '@angular/core';
+import {  ChangeDetectionStrategy, Component, HostBinding, Input,OnInit } from '@angular/core';
 import { FilterTypes, SortType } from '../../interfaces/filter.interface';
 import { ColumnService } from '../../services/column-service/column.service';
 import { FilterService } from '../../services/filter-service/filter.service';
@@ -6,6 +6,7 @@ import { FilterService } from '../../services/filter-service/filter.service';
 @Component({
   selector: 't-column',
   templateUrl: './t-column.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./t-column.component.scss']
 })
 export class TColumnComponent implements OnInit {

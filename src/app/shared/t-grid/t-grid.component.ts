@@ -1,12 +1,13 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Column, ColumnObserver } from '../interfaces/column.interface';
-import { FilterObserver, GridFilter } from '../interfaces/filter.interface';
+import {  GridFilter } from '../interfaces/filter.interface';
 import { ColumnService } from '../services/column-service/column.service';
 import { FilterService } from '../services/filter-service/filter.service';
 @Component({
   selector: 't-grid',
   templateUrl: './t-grid.component.html',
   styleUrls: ['./t-grid.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers:[]
 })
 export class TGridComponent implements OnInit {
@@ -14,28 +15,28 @@ export class TGridComponent implements OnInit {
   @Output() itemSelected = new EventEmitter<any>();
   @Output() filtersChange = new EventEmitter<GridFilter>();
   @Input() data: any;
-  filterObserver:FilterObserver;
+  filters$;
+  columns$;
   columnObserver: ColumnObserver;
   constructor(private filterService: FilterService, private columnService: ColumnService) {
-    const filterObserver = {
-      id: filterService.getObserversCount(),
-      notify: () => {setTimeout(() => this.filtersChange.emit(filterService.getAllFilters()))}
-    }
-    this.filterObserver = filterObserver
-    filterService.addObserver(filterObserver)
-    this.columns = columnService.getColumns()
+    this.filters$ = filterService.getFilters()
+    this.columns$ = this.columnService.getColumns()
+    this.filters$.subscribe((value) => this.getData(value));
+    this.columns$.subscribe((value) => this.columns = value)
   }
   ngAfterViewInit() {
   }
-  
+  getData(value: GridFilter) {
+    this.filtersChange.emit(value)
+  }
   ngOnInit(): void {
-    this.filtersChange.emit(this.filterService.getAllFilters())
+    this.filtersChange.emit(this.filters$.getValue())
   }
   selectItem(item: any) {
     this.itemSelected.emit(item);
   }
   ngOnDestroy(): void {
-    this.filterService.removeObserver(this.filterObserver)
+    this.filters$.unsubscribe()
   }
 
 }
