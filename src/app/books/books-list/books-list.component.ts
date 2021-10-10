@@ -17,6 +17,7 @@ export class BooksListComponent implements OnInit {
   selectedBook: Book;
   constructor(private booksService: BooksService) { }
   ngOnInit(): void {
+    this.getBooks(null)
   }
 
   selectBook(book: Book) {
@@ -24,7 +25,6 @@ export class BooksListComponent implements OnInit {
   }
 
   getBooks(filter:GridFilter) {
-    console.log("get", filter)
     this.books$ = this.booksService.getBooks(filter);
   }
   resetBook() {

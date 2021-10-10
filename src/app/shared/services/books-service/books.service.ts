@@ -10,8 +10,8 @@ export class BooksService {
 
   constructor(private http: HttpClient) { }
   convertFilterToUrl(filter:GridFilter): string {
-    if(!filter) {
-      return BASE_URL
+    if(!filter || (!filter[FilterTypes.SORT].field && !filter[FilterTypes.SEARCH].field)) {
+      return BASE_URL + `?_page=0`
     }
     const order = filter[FilterTypes.SORT].type === SortType.ASC ? 'asc' : 'desc'
     const sort = filter[FilterTypes.SORT].field

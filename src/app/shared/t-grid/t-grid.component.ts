@@ -30,7 +30,6 @@ export class TGridComponent implements OnInit {
     this.filtersChange.emit(value)
   }
   ngOnInit(): void {
-    this.filtersChange.emit(this.filters$.getValue())
   }
   selectItem(item: any) {
     this.itemSelected.emit(item);
