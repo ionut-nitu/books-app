@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
   ],
   exports:[
     TGridComponent,

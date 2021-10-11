@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FilterService } from '../../services/filter-service/filter.service';
 
 import { TPaginationComponent } from './t-pagination.component';
 
@@ -8,6 +9,7 @@ describe('TPaginationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [FilterService],
       declarations: [ TPaginationComponent ]
     })
     .compileComponents();

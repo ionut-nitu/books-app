@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TGridModule } from '../../t-grid/t-grid.module';
 import { Filter, FilterObserver, FilterTypes, GridFilter, SortType } from '../../interfaces/filter.interface';
 import { BehaviorSubject } from 'rxjs';
-const initialState: GridFilter = {
+export const filterInitialState: GridFilter = {
     [FilterTypes.SORT]: {
       field:null,
       type: SortType.ASC
@@ -12,8 +12,8 @@ const initialState: GridFilter = {
       pageSize:0,
     },
     [FilterTypes.SEARCH]: {
-      field:null,
-      value: null
+      field: null,
+      value: ''
     }
 }
 @Injectable({
@@ -21,23 +21,8 @@ const initialState: GridFilter = {
 })
 export class FilterService {
   observers: FilterObserver[] = []
-  filterState$ = new BehaviorSubject<GridFilter>(initialState)
+  filterState$ = new BehaviorSubject<GridFilter>(filterInitialState)
   constructor() { }
-  getObserversCount () {
-    return this.observers.length
-  }
-  addObserver(observer: FilterObserver) {
-    this.observers.push(observer)
-  }
-  removeObserver(observer: FilterObserver) {
-    const toDelete = this.observers.find(item => item.id === observer.id)
-    if(toDelete) {
-      this.observers.splice(this.observers.indexOf(observer), 1)
-    }
-  }
-  notifyObservers() {
-    this.observers.forEach(observer => observer.notify())
-  }
   changeFilter(newFilter: {type: FilterTypes, value: Filter }) {
     this.filterState$.next({
       ...this.filterState$.getValue(),
@@ -64,6 +49,15 @@ export class FilterService {
         ...this.filterState$.getValue()[FilterTypes.PAGINATION],
         pageSize,
         page:0
+      }
+    })
+  }
+  changeSearch({field, value}:{field:string, value:string}) {
+     this.filterState$.next({
+      ...this.filterState$.getValue(),
+      [FilterTypes.SEARCH]: {
+        field,
+        value
       }
     })
   }

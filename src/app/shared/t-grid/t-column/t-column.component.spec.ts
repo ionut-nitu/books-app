@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FilterService } from '../../services/filter-service/filter.service';
 
 import { TColumnComponent } from './t-column.component';
 
@@ -8,6 +9,7 @@ describe('TColumnComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers:[FilterService],
       declarations: [ TColumnComponent ]
     })
     .compileComponents();

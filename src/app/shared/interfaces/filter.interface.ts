@@ -9,7 +9,7 @@ export interface SortFilter {
 }
 export interface SearchFilter {
     field: string | null;
-    value: null | SortType;
+    value: null | string;
 }
 export interface PaginationFilter {
     page: number;
