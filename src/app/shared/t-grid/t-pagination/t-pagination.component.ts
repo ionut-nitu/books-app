@@ -23,16 +23,13 @@ export class TPaginationComponent implements OnInit {
   changePage(direction: number) {
      this.filterService.changePage(direction)
   }
-  onPageSizeChange(e:any) {
-    this.filterService.changePageSize(+e.target.value)
+  onPageSizeChange(value: string) {
+    this.filterService.changePageSize(+value)
   }
   goToNextPage() {
     this.changePage(1)
   }
   goToPreviousPage() {
     this.changePage(-1)
-  }
-  changePageLimit(pageSize: number) {
-    this.filterService.changePageSize(pageSize) 
   }
 }

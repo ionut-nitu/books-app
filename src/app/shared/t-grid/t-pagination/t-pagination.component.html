@@ -1,7 +1,7 @@
 <div class="pagination-container">
     <div class="page-size-container">
         <div>Page limit</div>
-        <select [value]="pageSize" (change)="onPageSizeChange($event)" class="page-size-select"> 
+        <select [value]="pageSize" (change)="onPageSizeChange($event.target.value)" class="page-size-select"> 
             <option value="0">None</option>
             <option value="10">10</option>
              <option value="50">50</option>
@@ -13,7 +13,7 @@
             <mat-icon aria-hidden="false" aria-label="Previous page">navigate_before</mat-icon>
         </div>
         <div>Page {{page + 1}}</div>
-        <div (click)="goToNextPage()" class="pagination-icon">
+        <div (click)="goToNextPage()" class="pagination-icon" id="go-next">
             <mat-icon aria-hidden="false" aria-label="Next page">keyboard_arrow_right</mat-icon>
         </div>
     </div>

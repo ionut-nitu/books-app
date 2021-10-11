@@ -29,9 +29,6 @@ export class TGridComponent implements OnInit {
   }
   ngAfterViewInit() {
   }
-  changeProgress() {
-    this.progress+=1
-  }
   getData(value: GridFilter) {
     this.filtersChange.emit(value)
   }
